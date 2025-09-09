@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(-20px); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .research-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .research-card:hover::before {
+            left: 100%;
+        }
+
+        .research-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .research-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .research-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .research-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .meta-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .references-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .references-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .reference-link {
+            display: block;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #495057;
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reference-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+            transition: left 0.4s;
+        }
+
+        .reference-link:hover::before {
+            left: 100%;
+        }
+
+        .reference-link:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left-color: #764ba2;
+        }
+
+        .reference-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .reference-url {
+            font-size: 0.9rem;
+            color: #6c757d;
+            word-break: break-all;
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: float-particle 10s infinite linear;
+        }
+
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 2.5rem; }
+            .research-grid { grid-template-columns: 1fr; }
+            .research-card { padding: 1.5rem; }
+        }
+
+        .add-research-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 2rem auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .add-research-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles" id="particles"></div>
+
+    <div class="container">
+        <header class="header">
+            <h1>My Research</h1>
+            <p class="subtitle">Simple. Focused. Impactful.</p>
+        </header>
+
+        <div class="research-grid" id="researchGrid">
+        </div>
+
+        <button class="add-research-btn" onclick="addResearchCard()">Add New Research</button>
+
+        <div class="references-section">
+            <h2 class="references-title">Key References & Resources</h2>
+            <div id="referencesContainer">
+                <!-- TensorFlow Documentation -->
+                <a href="https://www.tensorflow.org/tutorials/images/cnn" class="reference-link" target="_blank">
+                    <div class="reference-title">TensorFlow CNN Tutorial - Image Classification</div>
+                    <div class="reference-url">https://www.tensorflow.org/tutorials/images/cnn</div>
+                </a>
+                
+                <a href="https://www.tensorflow.org/api_docs" class="reference-link" target="_blank">
+                    <div class="reference-title">TensorFlow API Documentation</div>
+                    <div class="reference-url">https://www.tensorflow.org/api_docs</div>
+                </a>
+                
+                <!-- Web Framework -->
+                <a href="https://flask.palletsprojects.com/en/stable/" class="reference-link" target="_blank">
+                    <div class="reference-title">Flask - Python Web Framework Documentation</div>
+                    <div class="reference-url">https://flask.palletsprojects.com/en/stable/</div>
+                </a>
+                
+                <!-- Government & Official Resources -->
+                <a href="https://cag.gov.in/en" class="reference-link" target="_blank">
+                    <div class="reference-title">CAG India - Comptroller and Auditor General</div>
+                    <div class="reference-url">https://cag.gov.in/en</div>
+                </a>
+                
+                <!-- Industry & Equipment Resources -->
+                <a href="https://www.goldschmidt.com/en/" class="reference-link" target="_blank">
+                    <div class="reference-title">Goldschmidt Conference - Geochemistry</div>
+                    <div class="reference-url">https://www.goldschmidt.com/en/</div>
+                </a>
+                
+                <a href="https://www.gravotech.us/" class="reference-link" target="_blank">
+                    <div class="reference-title">Gravotech - Engraving & Marking Solutions</div>
+                    <div class="reference-url">https://www.gravotech.us/</div>
+                </a>
+                
+                <a href="https://www.hanslaserus.com/product/20w-portable-handheld-fiber-laser-marking-machine/" class="reference-link" target="_blank">
+                    <div class="reference-title">Hans Laser - 20W Portable Fiber Laser Marking Machine</div>
+                    <div class="reference-url">https://www.hanslaserus.com/product/20w-portable-handheld-fiber-laser-marking-machine/</div>
+                </a>
+                
+                <!-- Video Resources -->
+                <a href="https://youtu.be/GZfW2asa_ns?si=Fzn-K7qwUxjlhkBU" class="reference-link" target="_blank">
+                    <div class="reference-title">YouTube Tutorial Video</div>
+                    <div class="reference-url">https://youtu.be/GZfW2asa_ns?si=Fzn-K7qwUxjlhkBU</div>
+                </a>
+            </div>
+            
+            <button class="add-research-btn" onclick="addReference()" style="margin-top: 2rem;">Add New Reference</button>
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Add new research card
+        function addResearchCard() {
+            const title = prompt('Enter research title:');
+            const description = prompt('Enter research description:');
+            const tags = prompt('Enter tags (comma-separated):');
+            
+            if (title && description) {
+                const researchGrid = document.getElementById('researchGrid');
+                const newCard = document.createElement('div');
+                newCard.className = 'research-card';
+                
+                const tagElements = tags ? tags.split(',').map(tag => 
+                    `<span class="meta-tag">${tag.trim()}</span>`
+                ).join('') : '';
+                
+                newCard.innerHTML = `
+                    <h3 class="research-title">${title}</h3>
+                    <p class="research-description">${description}</p>
+                    <div class="research-meta">
+                        ${tagElements}
+                        <span class="meta-tag">${new Date().getFullYear()}</span>
+                    </div>
+                `;
+                
+                researchGrid.appendChild(newCard);
+            }
+        }
+
+        // Add new reference
+        function addReference() {
+            const title = prompt('Enter reference title:');
+            const url = prompt('Enter reference URL:');
+            
+            if (title && url) {
+                const referencesContainer = document.getElementById('referencesContainer');
+                const newReference = document.createElement('a');
+                newReference.className = 'reference-link';
+                newReference.href = url;
+                newReference.target = '_blank';
+                
+                newReference.innerHTML = `
+                    <div class="reference-title">${title}</div>
+                    <div class="reference-url">${url}</div>
+                `;
+                
+                referencesContainer.appendChild(newReference);
+            }
+        }
+
+        // Initialize particles when page loads
+        window.addEventListener('load', createParticles);
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
